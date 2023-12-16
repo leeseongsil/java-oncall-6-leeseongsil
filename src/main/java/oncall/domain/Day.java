@@ -9,7 +9,7 @@ public class Day {
     private final int date;
     private final DayOfWeek dayOfWeek;
 
-    private Day(Month month, int date, DayOfWeek dayOfWeek) {
+    Day(Month month, int date, DayOfWeek dayOfWeek) {
         this.month = month;
         this.date = date;
         this.dayOfWeek = dayOfWeek;
