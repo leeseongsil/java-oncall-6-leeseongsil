@@ -21,8 +21,14 @@ public enum DayOfWeek {
         this.index = index;
     }
 
-    public boolean isHoliday() {
-        return isHoliday;
+    public static DayOfWeek find(String name) {
+        return Stream.of(DayOfWeek.values())
+                .filter(dayOfWeek -> dayOfWeek.name.equals(name))
+                .findAny().orElseThrow(DayOfWeek::makeNoDayOfWeekException);
+    }
+
+    private static IllegalArgumentException makeNoDayOfWeekException() {
+        return new IllegalArgumentException("해당 요일은 존재하지 않습니다");
     }
 
     public DayOfWeek findNextDayOfWeek() {
@@ -30,5 +36,9 @@ public enum DayOfWeek {
         return Stream.of(DayOfWeek.values())
                 .filter(dayOfWeek -> dayOfWeek.index == nextIndex)
                 .findAny().orElseThrow();
+    }
+
+    public boolean isHoliday() {
+        return isHoliday;
     }
 }
