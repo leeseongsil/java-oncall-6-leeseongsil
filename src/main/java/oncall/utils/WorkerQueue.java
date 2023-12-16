@@ -1,36 +1,46 @@
 package oncall.utils;
 
-import java.util.LinkedList;
 import java.util.List;
 
 public class WorkerQueue {
 
     private final List<String> elements;
+    private int index = 0;
+    private String standing = null;
 
     public WorkerQueue(List<String> elements) {
-        if (elements.size() == 0) {
+        if (elements.isEmpty()) {
             throw new IllegalArgumentException();
         }
 
-        this.elements = new LinkedList<>(elements);
-    }
-
-    public String take() {
-        String element = elements.get(0);
-
-        elements.remove(element);
-        elements.add(element);
-        return element;
+        this.elements = List.copyOf(elements);
     }
 
     public String take(String previousElement) {
-        String element = elements.get(0);
-        if (element.equals(previousElement)) {
-            element = elements.get(1);
+        if (standing != null && !previousElement.equals(standing)) {
+            return getTempAndDelete();
         }
+        String candidate = nextElement();
+        if (candidate.equals(previousElement)) {
+            standing = candidate;
+            candidate = nextElement();
+        }
+        return candidate;
+    }
 
-        elements.remove(element);
-        elements.add(element);
-        return element;
+    private String getTempAndDelete() {
+        String temp = standing;
+        standing = null;
+        return temp;
+    }
+
+    private String nextElement() {
+        String temp = elements.get(index);
+        index = next(index);
+        return temp;
+    }
+
+    private int next(int index) {
+        return (index + 1) % elements.size();
     }
 }
