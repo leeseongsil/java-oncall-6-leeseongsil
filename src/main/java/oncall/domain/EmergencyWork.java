@@ -25,19 +25,19 @@ public class EmergencyWork {
     }
 
     public static void validateOrder(List<String> order) {
-        validateOneTimes(order);
+        validateIsNotOverlapped(order);
         validateSize(order);
         order.forEach(EmergencyWork::validateName);
     }
 
     private void validateOrder(List<String> weekdayOrder, List<String> weekendOrder) {
-        validateOneTimes(weekdayOrder);
+        validateIsNotOverlapped(weekdayOrder);
         validateSize(weekdayOrder);
         weekdayOrder.forEach(EmergencyWork::validateName);
         validateSameComposition(weekdayOrder, weekendOrder);
     }
 
-    private static void validateOneTimes(List<String> order) {
+    private static void validateIsNotOverlapped(List<String> order) {
         if (!isAppearedOneTime(order)) {
             throw new IllegalArgumentException("비상 근무자는 순번에 1회 편성되어야 합니다");
         }
