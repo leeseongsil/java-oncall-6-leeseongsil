@@ -38,6 +38,10 @@ public enum DayOfWeek {
                 .findAny().orElseThrow();
     }
 
+    public String getName() {
+        return name;
+    }
+
     public boolean isHoliday() {
         return isHoliday;
     }

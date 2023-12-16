@@ -45,6 +45,10 @@ public enum Month {
         return holidays.contains(date);
     }
 
+    public int getOrder() {
+        return order;
+    }
+
     public int getMaxDate() {
         return maxDate;
     }
