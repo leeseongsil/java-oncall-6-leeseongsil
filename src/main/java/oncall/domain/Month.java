@@ -25,4 +25,8 @@ public enum Month {
         this.maxDate = maxDate;
         this.holidays = holidays;
     }
+
+    public int getMaxDate() {
+        return maxDate;
+    }
 }
