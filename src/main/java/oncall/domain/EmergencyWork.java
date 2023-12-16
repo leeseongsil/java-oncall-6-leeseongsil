@@ -3,7 +3,6 @@ package oncall.domain;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Stream;
 import oncall.dto.EmergencyWorkDto;
 import oncall.utils.WorkerQueue;
 
@@ -61,8 +60,12 @@ public class EmergencyWork {
     }
 
     private boolean isSameComposition(List<String> weekdayOrder, List<String> weekendOrder) {
-        return Stream.of(weekdayOrder)
-                .allMatch(weekendOrder::contains);
+        for (String name : weekdayOrder) {
+            if (!weekendOrder.contains(name)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public List<EmergencyWorkDto> generate() {
