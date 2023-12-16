@@ -1,7 +1,6 @@
 package oncall.domain;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Day {
@@ -20,7 +19,7 @@ public class Day {
         return Stream.iterate(new Day(month, 1, startDayOfWeek),
                         day -> new Day(month, day.date + 1, day.dayOfWeek.findNextDayOfWeek()))
                 .limit(month.getMaxDate())
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public boolean isHoliday() {

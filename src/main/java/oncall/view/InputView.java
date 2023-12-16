@@ -2,7 +2,6 @@ package oncall.view;
 
 import camp.nextstep.edu.missionutils.Console;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import oncall.domain.DayOfWeek;
 import oncall.domain.Month;
@@ -53,7 +52,7 @@ public class InputView {
     private List<String> readStrings() {
         return Stream.of(read().split(SPLIT_LETTER, -1))
                 .map(String::trim)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private void print(String message) {
