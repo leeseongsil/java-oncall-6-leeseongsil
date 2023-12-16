@@ -22,8 +22,8 @@
 - 다음 요일 제공 기능
 - 입력받은 String에 따라 해당하는 DatOfWeek 반환 기능
 
-### Date
-- Month와 DayOfWeek로 구성
+### Day
+- Month와 DayOfWeek, date로 구성
 - 해당 날짜가 휴일 여부 제공
 - 법정 공휴일 & 요일 평일 여부 제공
 
