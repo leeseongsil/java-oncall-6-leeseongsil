@@ -1,6 +1,7 @@
 package oncall.domain;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 public enum Month {
     JANUARY(1, 31, List.of(1)),
@@ -24,6 +25,16 @@ public enum Month {
         this.order = order;
         this.maxDate = maxDate;
         this.holidays = holidays;
+    }
+
+    public static Month find(int order) {
+        return Stream.of(Month.values())
+                .filter(month -> month.isMatchOrder(order))
+                .findAny().orElseThrow();
+    }
+
+    private boolean isMatchOrder(int order) {
+        return order == this.order;
     }
 
     public int getMaxDate() {
