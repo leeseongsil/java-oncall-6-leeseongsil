@@ -37,6 +37,10 @@ public enum Month {
         return order == this.order;
     }
 
+    public boolean isLegalHoliday(int date) {
+        return holidays.contains(date);
+    }
+
     public int getMaxDate() {
         return maxDate;
     }
