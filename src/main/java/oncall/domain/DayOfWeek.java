@@ -1,5 +1,7 @@
 package oncall.domain;
 
+import java.util.stream.Stream;
+
 public enum DayOfWeek {
     MONDAY("월", false, 0),
     TUESDAY("화", false, 1),
@@ -21,5 +23,12 @@ public enum DayOfWeek {
 
     public boolean isHoliday() {
         return isHoliday;
+    }
+
+    public DayOfWeek findNextDayOfWeek() {
+        int nextIndex = (this.index + 1) % 7;
+        return Stream.of(DayOfWeek.values())
+                .filter(dayOfWeek -> dayOfWeek.index == nextIndex)
+                .findAny().orElseThrow();
     }
 }
