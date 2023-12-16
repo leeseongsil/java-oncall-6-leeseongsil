@@ -30,7 +30,11 @@ public enum Month {
     public static Month find(int order) {
         return Stream.of(Month.values())
                 .filter(month -> month.isMatchOrder(order))
-                .findAny().orElseThrow();
+                .findAny().orElseThrow(Month::makeNoMonthException);
+    }
+
+    private static IllegalArgumentException makeNoMonthException() {
+        return new IllegalArgumentException("해당 달은 존재하지 않습니다");
     }
 
     private boolean isMatchOrder(int order) {
