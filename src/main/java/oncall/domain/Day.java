@@ -27,8 +27,8 @@ public class Day {
         return dayOfWeek.isHoliday() || month.isLegalHoliday(date);
     }
 
-    public boolean isLegalHoliday() {
-        return month.isLegalHoliday(date);
+    public boolean isShowHoliday() {
+        return month.isLegalHoliday(date) && !dayOfWeek.isHoliday();
     }
 
     public int getMonth() {
