@@ -3,13 +3,13 @@ package oncall.domain;
 public class Day {
 
     private final Month month;
-    private final DayOfWeek dayOfWeek;
     private final int date;
+    private final DayOfWeek dayOfWeek;
 
-    public Day(Month month, DayOfWeek dayOfWeek, int date) {
+    public Day(Month month, int date, DayOfWeek dayOfWeek) {
         this.month = month;
-        this.dayOfWeek = dayOfWeek;
         this.date = date;
+        this.dayOfWeek = dayOfWeek;
     }
 
     public boolean isHoliday() {
@@ -18,5 +18,17 @@ public class Day {
 
     public boolean isLegalHoliday() {
         return month.isLegalHoliday(date);
+    }
+
+    public int getMonth() {
+        return month.getOrder();
+    }
+
+    public int getDate() {
+        return date;
+    }
+
+    public String getDayOfWeek() {
+        return dayOfWeek.getName();
     }
 }
