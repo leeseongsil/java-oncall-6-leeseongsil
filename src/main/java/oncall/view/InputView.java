@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.Stream;
 import oncall.domain.DayOfWeek;
 import oncall.domain.Month;
-import oncall.dto.WorkOrder;
 import oncall.dto.WorkSetting;
 
 public class InputView {
@@ -40,13 +39,14 @@ public class InputView {
         }
     }
 
-    public WorkOrder inputWorkOrder() {
+    public List<String> inputWeekdayWorkOrder() {
         print(WEEKDAY_REQUEST);
-        List<String> weekdayOrder = readStrings();
-        print(WEEKEND_REQUEST);
-        List<String> weekendOrder = readStrings();
+        return readStrings();
+    }
 
-        return new WorkOrder(weekdayOrder, weekendOrder);
+    public List<String> inputWeekendWorkOrder() {
+        print(WEEKEND_REQUEST);
+        return readStrings();
     }
 
     private List<String> readStrings() {

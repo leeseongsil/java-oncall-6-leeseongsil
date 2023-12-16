@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.function.Supplier;
 import oncall.domain.Day;
 import oncall.domain.EmergencyWork;
-import oncall.dto.WorkOrder;
 import oncall.dto.WorkSetting;
 import oncall.view.InputView;
 import oncall.view.OutputView;
@@ -27,8 +26,10 @@ public class EmergencyWorkController {
     }
 
     private EmergencyWork readEmergencyWork(List<Day> days) {
-        WorkOrder order = inputView.inputWorkOrder();
-        return new EmergencyWork(order.weekdayOrder(), order.weekendOrder(), days);
+        List<String> weekdayOrder = inputView.inputWeekdayWorkOrder();
+        EmergencyWork.validateOrder(weekdayOrder);
+        List<String> weekendOrder = inputView.inputWeekendWorkOrder();
+        return new EmergencyWork(weekdayOrder, weekendOrder, days);
     }
 
     private <T> T readRepeatedlyUntilNoException(Supplier<T> supplier) {

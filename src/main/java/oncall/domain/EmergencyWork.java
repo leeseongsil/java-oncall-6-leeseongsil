@@ -24,30 +24,36 @@ public class EmergencyWork {
         this.dates = dates;
     }
 
+    public static void validateOrder(List<String> order) {
+        validateOneTimes(order);
+        validateSize(order);
+        order.forEach(EmergencyWork::validateName);
+    }
+
     private void validateOrder(List<String> weekdayOrder, List<String> weekendOrder) {
         validateOneTimes(weekdayOrder);
         validateSize(weekdayOrder);
-        weekdayOrder.forEach(this::validateName);
+        weekdayOrder.forEach(EmergencyWork::validateName);
         validateSameComposition(weekdayOrder, weekendOrder);
     }
 
-    private void validateOneTimes(List<String> order) {
+    private static void validateOneTimes(List<String> order) {
         if (!isAppearedOneTime(order)) {
             throw new IllegalArgumentException("비상 근무자는 순번에 1회 편성되어야 합니다");
         }
     }
 
-    private boolean isAppearedOneTime(List<String> order) {
+    private static boolean isAppearedOneTime(List<String> order) {
         return order.size() == new HashSet<>(order).size();
     }
 
-    private void validateSize(List<String> order) {
+    private static void validateSize(List<String> order) {
         if (order.size() < MIN_WORKER || order.size() > MAX_WORKER) {
             throw new IllegalArgumentException("근무자 최소 5명, 최대 35명이어야 합니다");
         }
     }
 
-    private void validateName(String name) {
+    private static void validateName(String name) {
         if (name.isBlank() || name.length() > MAX_NAME) {
             throw new IllegalArgumentException("닉네임은 1자 이상 5자 이하이어야 합니다");
         }
